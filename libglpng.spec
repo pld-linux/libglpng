@@ -35,7 +35,7 @@ Requires:	OpenGL-devel
 %description devel
 Libraries, includes, etc to develop libglpng applications.
 
-%description -l pl devel
+%description devel -l pl
 Pliki developerskie libglpng.
 
 %package static
@@ -47,7 +47,7 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static libglpng library.
 
-%description -l pl static
+%description static -l pl
 Biblioteka statyczna libglpng.
 
 %prep
