@@ -1,0 +1,81 @@
+diff -urN libglpng.org/Example/Test.c libglpng/Example/Test.c
+--- libglpng.org/Example/Test.c	Sun Jan 13 16:55:51 2002
++++ libglpng/Example/Test.c	Sun Jan 13 16:56:08 2002
+@@ -6,8 +6,8 @@
+  * http://www.wyatt100.freeserve.co.uk/download.htm
+  */
+ 
+-#include <gl/glpng.h>
+-#include <gl/glut.h>
++#include <GL/glpng.h>
++#include <GL/glut.h>
+ #include <stdlib.h>
+ 
+ int angle = 0;
+diff -urN libglpng.org/Makefile libglpng/Makefile
+--- libglpng.org/Makefile	Thu Jan  1 01:00:00 1970
++++ libglpng/Makefile	Sun Jan 13 16:59:35 2002
+@@ -0,0 +1,35 @@
++CFLAGS=-Wall $(OPT) -fPIC -I$(shell pwd)/include -I/usr/X11R6/include
++LDFLAGS=-L/usr/X11R6/lib -lpng -lGL
++SHAREDLIBFLAGS=-shared
++DESTDIR=/usr/local
++DOCDIR=$(DESTDIR)/share/doc/libglpng
++
++all: libglpng.a libglpng.so.1.45
++
++libglpng.a: glpng.o
++	ar rv $@ $<
++
++libglpng.so.1.45: glpng.o
++	$(CC) $(CFLAGS) $(SHAREDLIBFLAGS) -Wl,-soname=libglpng.so.1 -Wl,--whole-archive $< -Wl,--no-whole-archive $(LDFLAGS) -o $@
++
++glpng.o: src/glpng.c
++	$(CC) $(CFLAGS) -c $<
++
++clean:
++	rm glpng.o libglpng.*
++
++install: libglpng.a libglpng.so.1.45
++	for i in include include/GL lib; do \
++		install -m 755 -d $(DESTDIR)/$$i; \
++	done
++	for i in $(DOCDIR) $(DOCDIR)/examples; do \
++		install -m 755 -d $$i; \
++	done
++	install -m 644 glpng.htm $(DOCDIR)/glpng.html
++	install -m 644 Example/Stunt.png Example/Test.c $(DOCDIR)/examples
++	install -m 644 include/GL/glpng.h $(DESTDIR)/include/GL
++	install -m 644 libglpng.* $(DESTDIR)/lib
++	ln -s libglpng.so.1.45 $(DESTDIR)/lib/libglpng.so.1
++	ln -s libglpng.so.1.45 $(DESTDIR)/lib/libglpng.so
++
++.PHONY: clean install
+diff -urN libglpng.org/src/glpng.c libglpng/src/glpng.c
+--- libglpng.org/src/glpng.c	Sun Jan 13 16:55:51 2002
++++ libglpng/src/glpng.c	Sun Jan 13 16:56:08 2002
+@@ -29,7 +29,7 @@
+ #include <GL/gl.h>
+ #include <stdlib.h>
+ #include <math.h>
+-#include "png/png.h"
++#include <png.h>
+ 
+ /* Used to decide if GL/gl.h supports the paletted extension */
+ #ifdef GL_COLOR_INDEX1_EXT
+@@ -113,6 +113,7 @@
+ 	}
+ }
+ 
++#ifdef _WIN32
+ static int ExtSupported(const char *x) {
+ 	static const GLubyte *ext = NULL;
+ 	const char *c;
+@@ -129,6 +130,7 @@
+ 
+ 	return 0;
+ }
++#endif
+ 
+ #define GET(o) ((int)*(data + (o)))
+ 
