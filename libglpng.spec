@@ -51,11 +51,13 @@ Static libglpng library.
 Biblioteka statyczna libglpng.
 
 %prep
-%setup -q -c -n %{name}-%{version}
+%setup -q -c
 %patch0 -p1
 
 %build
-%{__make} CC="%{__cc}" OPT="%{rpmcflags}"
+%{__make} \
+	CC="%{__cc}" \
+	OPT="%{rpmcflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
