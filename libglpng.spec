@@ -6,6 +6,7 @@ Release:	1
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://www.wyatt100.freeserve.co.uk/glpng.zip
+# Source0-md5:	bed59efb699a51e6de7434580df41395
 Patch0:		%{name}-debian.patch
 URL:		http://www.fachschaften.neuphilologie.uni-tuebingen.de/doc/libglpng/glpng.html
 BuildRequires:	OpenGL-devel
