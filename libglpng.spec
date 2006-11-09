@@ -29,7 +29,7 @@ tekstury OpenGL.
 Summary:	Libraries, includes, etc to develop libglpng applications
 Summary(pl):	Pliki developerskie libglpng
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-devel
 
 %description devel
@@ -42,7 +42,7 @@ Pliki developerskie libglpng.
 Summary:	Static libglpng library
 Summary(pl):	Biblioteka statyczna libglpng
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libglpng library.
