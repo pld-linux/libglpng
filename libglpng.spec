@@ -1,5 +1,5 @@
 Summary:	PNG loader library for OpenGL
-Summary(pl):	Biblioteka ³aduj±ca PNG dla OpenGL
+Summary(pl.UTF-8):   Biblioteka Å‚adujÄ…ca PNG dla OpenGL
 Name:		libglpng
 Version:	1.45
 Release:	1
@@ -21,13 +21,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is a library for OpenGL to load PNG graphics files as an OpenGL
 texture as easily as possible.
 
-%description -l pl
-To jest biblioteka dla OpenGL pozwalaj±ca ³adowaæ grafikê PNG jako
+%description -l pl.UTF-8
+To jest biblioteka dla OpenGL pozwalajÄ…ca Å‚adowaÄ‡ grafikÄ™ PNG jako
 tekstury OpenGL.
 
 %package devel
 Summary:	Libraries, includes, etc to develop libglpng applications
-Summary(pl):	Pliki developerskie libglpng
+Summary(pl.UTF-8):   Pliki developerskie libglpng
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	OpenGL-devel
@@ -35,19 +35,19 @@ Requires:	OpenGL-devel
 %description devel
 Libraries, includes, etc to develop libglpng applications.
 
-%description devel -l pl
+%description devel -l pl.UTF-8
 Pliki developerskie libglpng.
 
 %package static
 Summary:	Static libglpng library
-Summary(pl):	Biblioteka statyczna libglpng
+Summary(pl.UTF-8):   Biblioteka statyczna libglpng
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libglpng library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna libglpng.
 
 %prep
