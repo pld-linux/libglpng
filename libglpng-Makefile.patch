@@ -1,0 +1,44 @@
+- proper use of of DESTDIR
+- introduce PREFIX and LIBDIR
+--- libglpng-1.45/Makefile~	2009-09-22 08:51:33.683645548 +0200
++++ libglpng-1.45/Makefile	2009-09-22 09:04:38.941066846 +0200
+@@ -1,8 +1,10 @@
+ CFLAGS=-Wall $(OPT) -fPIC -I$(shell pwd)/include -I/usr/X11R6/include
+ LDFLAGS=-L/usr/X11R6/lib -lpng -lGL
+ SHAREDLIBFLAGS=-shared
+-DESTDIR=/usr/local
+-DOCDIR=$(DESTDIR)/share/doc/libglpng
++DESTDIR=
++PREFIX=/usr/local
++DOCDIR=$(PREFIX)/share/doc/libglpng
++LIBDIR=lib
+ 
+ all: libglpng.a libglpng.so.1.45
+ 
+@@ -19,17 +21,17 @@
+ 	rm glpng.o libglpng.*
+ 
+ install: libglpng.a libglpng.so.1.45
+-	for i in include include/GL lib; do \
+-		install -m 755 -d $(DESTDIR)/$$i; \
++	for i in $(PREFIX)include $(PREFIX)/include/GL $(LIBDIR); do \
++		install -m 755 -d $(DESTDIR)/$$i; \
+ 	done
+ 	for i in $(DOCDIR) $(DOCDIR)/examples; do \
+-		install -m 755 -d $$i; \
++		install -m 755 -d $(DESTDIR)$$i; \
+ 	done
+-	install -m 644 glpng.htm $(DOCDIR)/glpng.html
+-	install -m 644 Example/Stunt.png Example/Test.c $(DOCDIR)/examples
+-	install -m 644 include/GL/glpng.h $(DESTDIR)/include/GL
+-	install -m 644 libglpng.* $(DESTDIR)/lib
+-	ln -s libglpng.so.1.45 $(DESTDIR)/lib/libglpng.so.1
+-	ln -s libglpng.so.1.45 $(DESTDIR)/lib/libglpng.so
++	install -m 644 glpng.htm $(DESTDIR)$(DOCDIR)/glpng.html
++	install -m 644 Example/Stunt.png Example/Test.c $(DESTDIR)$(DOCDIR)/examples
++	install -m 644 include/GL/glpng.h $(DESTDIR)/$(PREFIX)/include/GL
++	install -m 644 libglpng.* $(DESTDIR)/$(LIBDIR)
++	ln -s libglpng.so.1.45 $(DESTDIR)/$(LIBDIR)/libglpng.so.1
++	ln -s libglpng.so.1.45 $(DESTDIR)/$(LIBDIR)/libglpng.so
+ 
+ .PHONY: clean install
