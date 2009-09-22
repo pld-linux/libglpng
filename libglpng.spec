@@ -8,6 +8,7 @@ Group:		X11/Libraries
 Source0:	http://www.wyatt100.freeserve.co.uk/glpng.zip
 # Source0-md5:	bed59efb699a51e6de7434580df41395
 Patch0:		%{name}-debian.patch
+Patch1:		%{name}-Makefile.patch
 URL:		http://www.fachschaften.neuphilologie.uni-tuebingen.de/doc/libglpng/glpng.html
 BuildRequires:	OpenGL-devel
 BuildRequires:	libpng-devel
@@ -53,6 +54,7 @@ Biblioteka statyczna libglpng.
 %prep
 %setup -q -c
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
@@ -63,7 +65,9 @@ Biblioteka statyczna libglpng.
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT%{_prefix}
+	LIBDIR=%{_libdir} \
+	PREFIX=%{_prefix} \
+	DESTDIR=$RPM_BUILD_ROOT
 
 rm -f Example/*.exe
 
