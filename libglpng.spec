@@ -2,16 +2,17 @@ Summary:	PNG loader library for OpenGL
 Summary(pl.UTF-8):	Biblioteka ładująca PNG dla OpenGL
 Name:		libglpng
 Version:	1.45
-Release:	1
+Release:	2
 License:	BSD
 Group:		X11/Libraries
 Source0:	http://www.wyatt100.freeserve.co.uk/glpng.zip
 # Source0-md5:	bed59efb699a51e6de7434580df41395
 Patch0:		%{name}-debian.patch
 Patch1:		%{name}-Makefile.patch
+Patch2:		libpng.patch
 URL:		http://www.fachschaften.neuphilologie.uni-tuebingen.de/doc/libglpng/glpng.html
 BuildRequires:	OpenGL-devel
-BuildRequires:	libpng-devel
+BuildRequires:	libpng12-devel
 BuildRequires:	unzip
 Requires:	OpenGL
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -55,6 +56,7 @@ Biblioteka statyczna libglpng.
 %setup -q -c
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__make} \
@@ -80,13 +82,14 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc *.htm
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libglpng.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libglpng.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %doc Example/*
 %{_includedir}/GL/*.h
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libglpng.so
 
 %files static
 %defattr(644,root,root,755)
