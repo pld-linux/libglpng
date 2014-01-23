@@ -1,0 +1,10 @@
+--- libglpng-1.45/Makefile.orig	2014-01-23 10:10:34.521714320 +0100
++++ libglpng-1.45/Makefile	2014-01-23 10:17:43.716062636 +0100
+@@ -1,5 +1,5 @@
+-CFLAGS=-Wall $(OPT) -fPIC -I$(shell pwd)/include -I/usr/X11R6/include
+-LDFLAGS=-L/usr/X11R6/lib -lpng -lGL
++CFLAGS=-Wall $(OPT) -fPIC -I$(shell pwd)/include `libpng12-config --cflags`
++LDFLAGS=-L/usr/X11R6/lib `libpng12-config --libs` -lGL -lm
+ SHAREDLIBFLAGS=-shared
+ DESTDIR=
+ PREFIX=/usr/local
